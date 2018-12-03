@@ -1,0 +1,30 @@
+Questions:
+
+	SASS replacement
+
+	@var seems to mean pass this to the view (need examples of how this works)...
+
+	Is refreshing the page acceptble after changing the shingle line ? 
+		Probably not
+		
+	Is using the whole API ~411 K ? 
+		No. Makes the page too slow.
+	
+	Wanted: To create the model with the API and then reparse it to a new API (my app will be a sort of middleware, lighter more cacheable)
+	- Yeah, calling the api from yourself (app side) is not such a good idea. Shelf this for now.
+		
+	Can I create a JSON object that only contains the data we need and not all the other rubbish ?
+		Yes. 
+		Takes in zipcode (for zip code picker nice to have)
+		Takes in Shingle uid
+		
+		Returns: 
+			line_name
+			hero & gallery & colors
+
+			{
+				line_name:
+				data:[{hero_url:, image_url:, color:}, {hero_url:, image_url:, color:}]
+			}
+	
+	

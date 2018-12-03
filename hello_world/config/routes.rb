@@ -3,5 +3,11 @@ Rails.application.routes.draw do
 
 	# First route
 	root to: 'pages#index'
+	
+	namespace :api do 
+		namespace :v1 do 
+			resources :heros
+		 end 
+	end 
 
 end

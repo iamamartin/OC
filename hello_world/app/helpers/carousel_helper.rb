@@ -13,7 +13,7 @@ module CarouselHelper
 
     def html
       content = safe_join([indicators, slides, controls])
-      content_tag(:div, content, id: uid, class: 'carousel slide')
+      content_tag(:div, content, id: uid, 'data-interval':false, class: 'carousel slide')
     end
 
     private

@@ -18,8 +18,8 @@ heros = body[0]['shingle_colors'].map{|item| item['swatch_768x485_url']}
 %>
 <%= select("body[0]", "['uid']", body.map {|v| [ v['name'], v['uid'] ] }, {}, { :onChange =>'newline(this);' }) %>
 
-<%= gallery_for(swatches, colornames) %>
-
 <%= carousel_for(heros) %>
+
+<%= gallery_for(swatches, colornames) %>
 
 <%= body[0]["name"] %>

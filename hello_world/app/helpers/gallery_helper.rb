@@ -26,7 +26,7 @@ module GalleryHelper
 			tures = descriptions.map{ |description| ture(description)}
 			
 			# join images and text here (errrr)
-			pictures = pics.map.with_index{|val, index| picture(val, tures[index]) }
+			pictures = pics.map.with_index{|val, index| picture(val, tures[index], index) }
 
 			#puts pictures
 				
@@ -41,11 +41,11 @@ module GalleryHelper
  			 content_tag(:div, description)
  		end 
  
- 		def picture(pic, ture)
+ 		def picture(pic, ture, index)
  			content= safe_join([pic, ture])
  			
  			#, { :onClick =>'slideTo(this);' }
- 			content_tag(:div, content, class:'col-md-2', onclick:'slideTo()')
+ 			content_tag(:div, content, id:('gal_' +index.to_s), class:'col-md-2', onclick:'slideTo(this)')
  		end
  
 	end

@@ -13,7 +13,7 @@ module GalleryHelper
 		
 		def html
 			content = gallery			
-			content_tag(:div, gallery, id: uid, class: 'grid')
+			content_tag(:div, gallery, id: uid, class: 'row')
 		end
 		
 		private
@@ -43,7 +43,9 @@ module GalleryHelper
  
  		def picture(pic, ture)
  			content= safe_join([pic, ture])
- 			content_tag(:div, content, class:'tony')
+ 			
+ 			#, { :onClick =>'slideTo(this);' }
+ 			content_tag(:div, content, class:'col-md-2', onclick:'slideTo()')
  		end
  
 	end

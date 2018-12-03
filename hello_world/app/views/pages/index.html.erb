@@ -1,16 +1,9 @@
 <h1>Home page</h1>
-
-placeholder
-
 <%
-
-
 response = HTTParty.get('https://mdms.owenscorning.com/api/v1/product/shingles?zip=43659')
 body = JSON.parse(response.body)
 
-puts body[0]["name"]
-
-
+#puts body[0]["name"]
 #body[0]["shingle_colors"].each do |key, array|
 #  puts key["name"]
 #  puts key["swatch_160x160_url"]

@@ -7,6 +7,13 @@ Questions:
 	Is refreshing the page acceptble after changing the shingle line ? 
 		Probably not
 		
+		However, deadline means.... go with what you know right now....
+		At least it means I get to show I can post a form 		 :)
+		At least it means I get to show I can use a query string :)
+		
+		Bookmark button: need line and color 
+		?zip&=XXXXX&line=x&color="name"
+		
 	Is using the whole API ~411 K ? 
 		No. Makes the page too slow.
 	
@@ -14,7 +21,7 @@ Questions:
 	- Yeah, calling the api from yourself (app side) is not such a good idea. Shelf this for now.
 		
 	Can I create a JSON object that only contains the data we need and not all the other rubbish ?
-		Yes. 
+
 		Takes in zipcode (for zip code picker nice to have)
 		Takes in Shingle uid
 		
@@ -27,4 +34,4 @@ Questions:
 				data:[{hero_url:, image_url:, color:}, {hero_url:, image_url:, color:}]
 			}
 	
-	
+	assets refresh vs restarting server all the time

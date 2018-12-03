@@ -1,4 +1,16 @@
 
+function subline(e){
+	p = e.selectedIndex
+	var url = window.location.href;
+	if (url.indexOf('?') > -1){
+	   url += '&line=' + p
+	}else{
+	   url += '?line=' + p
+	}
+window.location.href = url;
+}
+
+
 function newline(e){
 
 var oR = function(url, callback ) {
@@ -20,8 +32,8 @@ oR("https://mdms.owenscorning.com/api/v1/product/shingles?zip=43659", function( 
 	// Do your post processing here. 
 	if( err ) { console.log( "Error!" ); }
 
-	var body = JSON.parse(response)
-	alert(body[e.selectedIndex]["name"]);
+	//var body = JSON.parse(response)
+	//alert('API call to replace form post' + body[e.selectedIndex]["name"]);
 
 });	
 

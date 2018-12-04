@@ -1,15 +1,24 @@
 
-function subline(e){
-	p = e.selectedIndex
-	var url = window.location.href;
-	if (url.indexOf('?') > -1){
-	   url += '&line=' + p
-	}else{
-	   url += '?line=' + p
-	}
-window.location.href = url;
+function  changezip(){
+	sZip = document.getElementById("zip").value;
+
+	setCookie("zip", sZip, 1);
 }
 
+function setCookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function subline(e){
+	//p = e.selectedIndex
+	p = e.options[e.selectedIndex].value
+	var url = window.location.pathname;
+	url += '?line=' + p
+	window.location.href = url;
+}
 
 function newline(e){
 

@@ -1,6 +1,7 @@
 <h1>Home page</h1>
 <%
 
+#puts @zip.to_s
 
 response = HTTParty.get('https://mdms.owenscorning.com/api/v1/product/shingles?zip='+@zip.to_s)
 body = JSON.parse(response.body)
@@ -11,20 +12,32 @@ body = JSON.parse(response.body)
 #  puts key["swatch_160x160_url"]
 #end
 
-colornames = body[@line]['shingle_colors'].map{|item| item['name']}
-swatches = body[@line]['shingle_colors'].map{|item| item['swatch_160x160_url']}
-heros = body[@line]['shingle_colors'].map{|item| item['swatch_768x485_url']}
+puts "*"
+puts @line
+puts @uline
+puts "*"
+
+iline = body.index{ |item| item['uid']==@uline}
 
 
+
+colornames = body[iline]['shingle_colors'].map{|item| item['name']}
+swatches = body[iline]['shingle_colors'].map{|item| item['swatch_160x160_url']}
+heros = body[iline]['shingle_colors'].map{|item| item['swatch_768x485_url']}
 
 
 # newline(this)
 %>
-<%= select("body[0]", "['uid']", body.map {|v| [ v['name'], v['uid'] ] }, {}, { :onChange =>'subline(this);' }) %>
+Zip: <input type=text id=zip value=<%=@zip%> >
+<%= button_tag "Change Zip",  :onClick=>'changezip()' %><br/>
 
-<%= body[@line]["name"] %>
+<div>XX
+<%=  select_tag("body[iline]", options_for_select(body.map {|v| [ v['name'], v['uid'] ] }, @uline),  :onChange =>'subline(this);'  ) %><br/>
+</div>
 
-<%= carousel_for(heros) %>
+<%= body[iline]["name"] %><br/>
+
+<%= carousel_for(heros) %><br/>
 
 <%= gallery_for(swatches, colornames) %>
 

@@ -13,3 +13,8 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.carousel {
+  position: relative;
+  width: -moz-fit-content;
+}

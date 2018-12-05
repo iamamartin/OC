@@ -14,11 +14,10 @@ class PagesController < ApplicationController
 			@uline = params['line']	
 		end
 			
-			
-				
-		#@color = params['color']
-		#params['zip']
-		
+		@color = ''
+		if (params[:line].present?)
+			@color = params['color']
+		end
 
 	
 	end

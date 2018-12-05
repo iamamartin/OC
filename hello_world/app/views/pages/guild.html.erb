@@ -11,18 +11,15 @@ body = JSON.parse(response.body)
 #  puts key["name"]
 #  puts key["swatch_160x160_url"]
 #end
-#puts "*"
-#puts @line
-#puts @uline
-#puts "*"
+
+puts "*"
+puts @line
+puts @uline
+puts "*"
 
 iline = body.index{ |item| item['uid']==@uline}
 
-puts @color
 
-icolor = body[iline]['shingle_colors'].index{|item| item['name']==@color}
-
-puts icolor
 
 colornames = body[iline]['shingle_colors'].map{|item| item['name']}
 swatches = body[iline]['shingle_colors'].map{|item| item['swatch_160x160_url']}
@@ -34,11 +31,8 @@ heros = body[iline]['shingle_colors'].map{|item| item['swatch_768x485_url']}
 Zip: <input type=text id=zip value=<%=@zip%> >
 <%= button_tag "Change Zip",  :onClick=>'changezip()' %><br/>
 
-<%= button_tag "Bookmark This ", :id=>'bookmarkme'  %><br/>
-
-
 <div>XX
-<%=  select_tag("body[iline]", options_for_select(body.map {|v| [ v['name'], v['uid'] ] }, @uline),  :onChange =>'newline(this);'  ) %><br/>
+<%=  select_tag("body[iline]", options_for_select(body.map {|v| [ v['name'], v['uid'] ] }, @uline),  :onChange =>'subline(this);'  ) %><br/>
 </div>
 
 <%= body[iline]["name"] %><br/>

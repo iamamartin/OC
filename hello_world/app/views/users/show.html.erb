@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Line:</strong>
+  <%= @user.Line %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @user.Color %>
+</p>
+
+<p>
+  <strong>Uline:</strong>
+  <%= @user.ULine %>
+</p>
+
+<p>
+  <strong>Ucolor:</strong>
+  <%= @user.UColor %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

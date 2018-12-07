@@ -35,3 +35,13 @@ Questions:
 			}
 	
 	assets refresh vs restarting server all the time
+
+	Bookmark from javscript is no longer reliably possible in chrom and firefox. This functionality used to exist and appears to have been disabled.
+	
+	If the code was done from a restful page, with a new page from each shingle, you could get a nice bookmarkable link
+	/shingle-line/1/color/2 at the cost of refreshing the side all the time. 
+	
+	or you could do what the OC site did and save a customer UID with the shingle/color combo into a db table to be retrived later, 
+	but it's not a bookmark.
+	
+	

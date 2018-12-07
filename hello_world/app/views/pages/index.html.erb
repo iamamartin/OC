@@ -34,11 +34,10 @@ heros = body[iline]['shingle_colors'].map{|item| item['swatch_768x485_url']}
 Zip: <input type=text id=zip value=<%=@zip%> >
 <%= button_tag "Change Zip",  :onClick=>'changezip()' %><br/>
 
-<%= button_tag "Bookmark This ", :id=>'bookmarkme'  %><br/>
+<%= button_tag "Can't Bookmark This ", :id=>'bookmarkme'  %><br/>
 
-
-<div>XX
-<%=  select_tag("body[iline]", options_for_select(body.map {|v| [ v['name'], v['uid'] ] }, @uline),  :onChange =>'newline(this);'  ) %><br/>
+<div>
+	<%=  select_tag("body[iline]", options_for_select(body.map {|v| [ v['name'], v['uid'] ] }, @uline),  :onChange =>'newline(this);'  ) %><br/>
 </div>
 
 <%= body[iline]["name"] %><br/>

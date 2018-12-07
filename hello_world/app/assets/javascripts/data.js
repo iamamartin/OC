@@ -20,15 +20,13 @@ function subline(e){
 	//p = e.selectedIndex
 	p = e.options[e.selectedIndex].value
 	var url = window.location.pathname;
-	url += '?line=' + p
+	url += '?line=' + p 
 	window.location.href = url;
 }
 
 
 function slideTo(e){
-
 	iSlide= e.id.replace('gal_', '')
-
 
 	var oNodes = $('.carousel-inner')[0].childNodes
 	var oInd = $('.carousel-indicators')[0].childNodes
@@ -37,12 +35,12 @@ function slideTo(e){
 	for (i=0; i<oNodes.length; i++){
 		oNodes[i].className="item"
 		oInd[i].className=""
-	 	if (i==iSlide){
-	 		oNodes[i].className="item active"
-	 		oInd[i].className="active"
-	 	}		
+		if (i==iSlide){
+			oNodes[i].className="item active"
+			oInd[i].className="active"
+		}
 	}
-	
+
 }
 
 function newline(e){
@@ -111,7 +109,7 @@ $(document).on('turbolinks:load', function() {
 		// Do your post processing here. 
 		if( err ) { console.log( "Error!" ); }
 	
-		 gJSON = JSON.parse(response)
+		gJSON = JSON.parse(response)
 		//alert('API call to replace form post' + body[e.selectedIndex]["name"]);
 	
 	})	
@@ -122,19 +120,20 @@ $(document).on('turbolinks:load', function() {
 
 // bookmark
 $(function() {
-	$('bookmarkme').click(function() {
+	$('#bookmarkme').click(function() {
 
-	document.getElementById("").value;
-	document.getElementById("").value;
+	i = $('#body_iline')[0].selectedIndex
 	
+	sLine = $('#body_iline')[0].options[i].value
+	sColor = getColor();
 
-	 url = window.location.pathname;
-	url += '?line=1' +  + '&color=1'
-	
+	url = window.location.pathname;
+	url += '?line=' + sLine + '&color=' + sColor
+
 	if (window.sidebar && window.sidebar.addPanel) { // Mozilla Firefox Bookmark
-		window.sidebar.addPanel(document.title, window.location.href, '');
+		window.sidebar.addPanel(document.title, url, '');
 	} else if (window.external && ('AddFavorite' in window.external)) { // IE Favorite
-		window.external.AddFavorite(location.href, document.title);
+		window.external.AddFavorite(url, document.title);
 	} else if (window.opera && window.print) { // Opera Hotlist
 		this.title = document.title;
 		return true;
@@ -144,18 +143,20 @@ $(function() {
 	});
 	
 	function getColor(){
-	
-		for (i=0; i<oNodes.length; i++){
-		 	if (oNodes[i].className=="item active"){
-				// color = i
-				
-				
-		 	}
-		}	
-	
-	};
-	
-	
+
+		i = $('#body_iline')[0].selectedIndex
+		j=0
+		for (var oL in gJSON[i]['shingle_colors']){
+			// Find active image
+			var oNodes = $('.carousel-inner')[j].childNodes
+			for (j=0; j<oNodes.length; j++){
+				// This is the one we want
+				if (oNodes[j].className =="item active"){
+					return gJSON[i]['shingle_colors'][j]['name']
+				}
+			};
+		}
+	}
 
 });
 

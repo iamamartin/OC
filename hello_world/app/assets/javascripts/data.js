@@ -1,5 +1,5 @@
 
-function  changezip(){
+function changezip(){
 	sZip = document.getElementById("zip").value;
 	setCookie("zip", sZip, 1);
 }
@@ -27,6 +27,10 @@ function subline(e){
 
 function slideTo(e){
 	iSlide= e.id.replace('gal_', '')
+	slide(iSlide)
+}
+
+function slide(iSlide){
 
 	var oNodes = $('.carousel-inner')[0].childNodes
 	var oInd = $('.carousel-indicators')[0].childNodes
@@ -44,8 +48,9 @@ function slideTo(e){
 }
 
 function newline(e){
+	
 	uline = e.options[e.selectedIndex].value
-	//color = gJSON[e.selectedIndex]['shingle_colors']
+	color = gJSON[e.selectedIndex]['shingle_colors']
 
 	datatarget = $('.carousel')[0].id
 	//galclass = //$('.gal_0')[0].className
@@ -73,8 +78,6 @@ function newline(e){
 	$('.carousel-inner')[0].innerHTML = sCI
 	$('.carousel-indicators')[0].innerHTML = sInd
 	$('.row')[0].innerHTML = sGal
-
-
 
 }
 
@@ -105,12 +108,15 @@ $(document).on('turbolinks:load', function() {
 	if (sZip.length == 0){ 
 		sZip = "43606"
 	}
+
 	oR("https://mdms.owenscorning.com/api/v1/product/shingles?zip=" + sZip , function( err, response ){
 		// Do your post processing here. 
 		if( err ) { console.log( "Error!" ); }
 	
 		gJSON = JSON.parse(response)
 		//alert('API call to replace form post' + body[e.selectedIndex]["name"]);
+		
+		
 	
 	})	
 
@@ -164,70 +170,69 @@ $(function() {
 
 // fave
 $(function() {
-		$('#fave').click(function() {
+	$('#fave').click(function() {
+
+		i = $('#body_iline')[0].selectedIndex
+		
+		sLine = $('#body_iline')[0].options[i].value
+		sColor = getColor();
 	
-			i = $('#body_iline')[0].selectedIndex
-			
-			sLine = $('#body_iline')[0].options[i].value
-			sColor = getColor();
-		
-			var UserID
-			UserID = getCookieValue("UserID")
-			if (UserID=="undefined" || UserID==""){
-				UserID = guid();
-				setCookie("UserID", UserID, 1);
-			}
-
-			
-			sParams = '?UserID=' + UserID + '&ULine=' + sLine + '&UColor=' + sColor
-
-			var oR = function(url, callback ) {
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET", url );
-			
-				xhr.onload = function() {
-					callback( null, xhr.response );
-				}; 
-			
-				xhr.onerror = function() {
-					callback( xhr.response );
-				};
-			
-				xhr.send();
-			}
-		
-			oR("/faves/save" + sParams , function( err, response ){
-					// Do your post processing here. 
-					if( err ) { console.log( "Error!" ); }
-				
-					gJSON = JSON.parse(response)
-					//alert('API call to replace form post' + body[e.selectedIndex]["name"]);
-				
-				})
-
-			});
-		
-		function guid(){
-		  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-			return v.toString(16);
-			});
+		var UserID
+		UserID = getCookieValue("UserID")
+		if (UserID=="undefined" || UserID==""){
+			UserID = guid();
+			setCookie("UserID", UserID, 1);
+			setCookie("UColor", sColor, 1);
 		}
 
+		
+		sParams = '?UserID=' + UserID + '&ULine=' + sLine + '&UColor=' + sColor
+
+		var oR = function(url, callback ) {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", url );
+		
+			xhr.onload = function() {
+				callback( null, xhr.response );
+			}; 
+		
+			xhr.onerror = function() {
+				callback( xhr.response );
+			};
+		
+			xhr.send();
+		}
 	
-		function getColor(){
+		oR("/faves/save" + sParams , function( err, response ){
+				// Do your post processing here. 
+				if( err ) { console.log( "Error!" ); }
+			
+				gJSON = JSON.parse(response)
+				//alert('API call to replace form post' + body[e.selectedIndex]["name"]);
+			
+			})
+
+		});
 	
-			i = $('#body_iline')[0].selectedIndex
-			j=0
-			for (var oL in gJSON[i]['shingle_colors']){
-				// Find active image
-				var oNodes = $('.carousel-inner')[j].childNodes
-				for (j=0; j<oNodes.length; j++){
-					// This is the one we want
-					if (oNodes[j].className =="item active"){
-						return gJSON[i]['shingle_colors'][j]['name']
-					}
+	function guid(){
+	  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+		return v.toString(16);
+		});
+	}
+
+	function getColor(){
+		i = $('#body_iline')[0].selectedIndex
+		j=0
+		for (var oL in gJSON[i]['shingle_colors']){
+			// Find active image
+			var oNodes = $('.carousel-inner')[j].childNodes
+			for (j=0; j<oNodes.length; j++){
+				// This is the one we want
+				if (oNodes[j].className =="item active"){
+					return gJSON[i]['shingle_colors'][j]['name']
 				}
 			}
 		}
+	}
 })

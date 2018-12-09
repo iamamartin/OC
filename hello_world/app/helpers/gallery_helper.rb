@@ -8,11 +8,11 @@ module GalleryHelper
 	class Gallery
 		def initialize(view, images, descriptions)
 			@view, @images, @descriptions = view, images, descriptions
-			@uid = SecureRandom.hex(6)		
+			@uid = SecureRandom.hex(6)
 		end
 		
 		def html
-			content = gallery			
+			content = gallery
 			content_tag(:div, gallery, id: uid, class: 'row')
 		end
 		

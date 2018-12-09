@@ -5,9 +5,6 @@ class FavesController < ApplicationController
 	def index
 		@faves = Fave.all
 		@counts = Fave.all.select("ULine, UColor, count(*) as X").group("Uline, UColor")
-
-
-
 	end
 
 	# POST /faves/save

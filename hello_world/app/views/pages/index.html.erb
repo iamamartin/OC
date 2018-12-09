@@ -8,45 +8,50 @@ body = JSON.parse(response.body)
 
 #puts body[@line]["name"]
 #body[@line]["shingle_colors"].each do |key, array|
-#  puts key["name"]
-#  puts key["swatch_160x160_url"]
-#end
-#puts "*"
-#puts @line
+#puts key["name"]
+#puts key["swatch_160x160_url"]
+
+puts @line
+
+
+
 #puts @uline
-#puts "*"
 
-iline = body.index{ |item| item['uid']==@uline}
+iline=0
+icolor=0
 
-puts @color
+if (@fave!="")
+	puts "Tony tony tony"
+	puts @fave.ULine
+	@uline = @fave.ULine
+	@color = @fave.UColor
+	iline = body.index{ |item| item['uid']==@uline}
+	icolor = body[iline]['shingle_colors'].index{|item| item['name']==@color}
+end
 
-icolor = body[iline]['shingle_colors'].index{|item| item['name']==@color}
 
-puts icolor
-
+#puts icolor
 colornames = body[iline]['shingle_colors'].map{|item| item['name']}
 swatches = body[iline]['shingle_colors'].map{|item| item['swatch_160x160_url']}
 heros = body[iline]['shingle_colors'].map{|item| item['swatch_768x485_url']}
 
-
 # newline(this)
 %>
-Zip: <input type=text id=zip value=<%=@zip%> >
+Zip: <input type=text id=zip value=<%=@zip%> ><br/>
+
 <%= button_tag "Change Zip",  :onClick=>'changezip()' %><br/>
 
 <%= button_tag "Can't Bookmark This ", :id=>'bookmarkme'  %><br/>
 
 <%= button_tag "Record Fave ", :id=>'fave'  %><br/>
 
-
 <div>
-	<%=  select_tag("body[iline]", options_for_select(body.map {|v| [ v['name'], v['uid'] ] }, @uline),  :onChange =>'newline(this);'  ) %><br/>
+	<%=  select_tag("body[iline]", options_for_select(body.map {|v| [ v['name'], v['uid'] ] }, @uline), :onChange =>'newline(this);' ) %><br/>
 </div>
 
 <%= body[iline]["name"] %><br/>
 
-<%= carousel_for(heros) %><br/>
+<%= carousel_for(heros, icolor) %><br/>
 
 <%= gallery_for(swatches, colornames) %>
-
 

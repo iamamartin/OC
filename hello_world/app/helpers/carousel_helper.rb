@@ -1,14 +1,17 @@
 # app/helpers/carousel_helper.rb
 
 module CarouselHelper
-  def carousel_for(images)
-    Carousel.new(self, images).html
+  def carousel_for(images, iselected)
+    Carousel.new(self, images, iselected).html
   end
 
   class Carousel
-    def initialize(view, images)
-      @view, @images = view, images
+    def initialize(view, images, iselected)
+      @view = view
+      @images =  images
+      @iselected = iselected
       @uid = SecureRandom.hex(6)
+    	puts @iselected
     end
 
     def html
@@ -28,7 +31,7 @@ module CarouselHelper
 
     def indicator_tag(index)
       options = {
-        class: (index.zero? ? 'active' : ''),
+        class: ((index==@iselected) ? 'active' : ''),
         data: { 
           target: uid, 
           slide_to: index
@@ -39,13 +42,14 @@ module CarouselHelper
     end
 
     def slides
-      items = images.map.with_index { |image, index| slide_tag(image, index.zero?) }
+      items = images.map.with_index { |image, index| slide_tag(image, index) }
       content_tag(:div, safe_join(items), class: 'carousel-inner')
     end
 
     def slide_tag(image, is_active)
+    
       options = {
-        class: (is_active ? 'item active' : 'item'),
+        class: ((is_active==@iselected) ? 'item active' : 'item'),
       }
 
       content_tag(:div, image_tag(image), options)

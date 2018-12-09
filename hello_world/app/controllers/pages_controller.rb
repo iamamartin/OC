@@ -21,12 +21,6 @@ class PagesController < ApplicationController
 
 	
 	end
-	
-	def  
 
-			@color = params['color']
-
-	
-	end 
 
 end

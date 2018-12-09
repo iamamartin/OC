@@ -36,6 +36,9 @@ Zip: <input type=text id=zip value=<%=@zip%> >
 
 <%= button_tag "Can't Bookmark This ", :id=>'bookmarkme'  %><br/>
 
+<%= button_tag "Record Fave ", :id=>'fave'  %><br/>
+
+
 <div>
 	<%=  select_tag("body[iline]", options_for_select(body.map {|v| [ v['name'], v['uid'] ] }, @uline),  :onChange =>'newline(this);'  ) %><br/>
 </div>

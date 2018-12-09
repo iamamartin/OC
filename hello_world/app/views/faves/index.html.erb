@@ -1,0 +1,47 @@
+<h1>Favorite shingle count page</h1>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Fave List</h1>
+
+<table cellpadding=2 cellspacing=2>
+  <thead>
+    <tr>
+      <th>UserID</th>
+      <th>Uline</th>
+      <th>Ucolor</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @faves.each do |fave| %>
+      <tr>
+        <td><%= fave.UserID %></td>
+        <td><%= fave.ULine %></td>
+        <td><%= fave.UColor %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</br>
+<table cellpadding=2 cellspacing=2 border=1>
+  <thead>
+    <tr>
+      <th>Uline</th>
+      <th>Ucolor</th>
+      <th>Counts</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @counts.each do |count| %>
+      <tr>
+        <td><%= count.ULine %></td>
+        <td><%= count.UColor %></td>
+        <td><%= count.X %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>

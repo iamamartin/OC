@@ -45,6 +45,8 @@ Zip: <input type=text id=zip value=<%=@zip%> ><br/>
 
 <%= button_tag "Record Fave ", :id=>'fave'  %><br/>
 
+Email: <input type=text id=email value=<%=@email%> ><%= button_tag "Email my choice ", :id=>'mail'  %><br/>
+
 <div>
 	<%=  select_tag("body[iline]", options_for_select(body.map {|v| [ v['name'], v['uid'] ] }, @uline), :onChange =>'newline(this);' ) %><br/>
 </div>

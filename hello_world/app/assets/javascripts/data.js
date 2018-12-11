@@ -236,3 +236,11 @@ $(function() {
 		}
 	}
 })
+
+// email
+$(function() {
+	$('#email').click(function() {
+
+
+	})
+})
